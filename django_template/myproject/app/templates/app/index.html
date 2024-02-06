@@ -2,25 +2,13 @@
 
 {% block content %}
 
-<div class="jumbotron">
-    <h1>ABC System</h1>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Users</h2>
-        <p>
-            e0001 - employee
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>Modules</h2>
-        <p>
-            Module 1
-        </p>
-        <p>
-            Module 2
-        </p>
+<div class="text-center"> <!-- Use Bootstrap's text-center class to center-align content -->
+    <h1>Dental Clinic Tracking System </h1>
+    <p class="lead">Welcome To Our System.</p>
+    <!-- Stack the buttons vertically and center-align them -->
+    <div class="btn-group-vertical" role="group">
+        <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+        <a href="{% url 'signup' %}" class="btn btn-success">Sign Up</a>
     </div>
 </div>
 
