@@ -4,7 +4,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
-
+from django.contrib.auth import login, authenticate
+from .forms import SignUpForm
+from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 
 def home(request):
@@ -50,13 +52,32 @@ def about(request):
 
 @login_required
 def menu(request):
-    check_employee = request.user.groups.filter(name='employee').exists()
+    check_dentist = request.user.groups.filter(name='dentist').exists()
+    check_patient = request.user.groups.filter(name='patient').exists()
 
     context = {
             'title':'Main Menu',
-            'is_employee': check_employee,
+            'is_dentist': check_dentist,
+            'is_patient': check_patient,
             'year':datetime.now().year,
         }
     context['user'] = request.user
 
     return render(request,'app/menu.html',context)
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()  # Load the profile instance created by the signal
+            user.save()
+            patient_group = Group.objects.get(name='patient')  # Make sure this group exists
+            patient_group.user_set.add(user)
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+            return redirect('menu')
+    else:
+        form = SignUpForm()
+    return render(request, 'app/signup.html', {'form': form})
