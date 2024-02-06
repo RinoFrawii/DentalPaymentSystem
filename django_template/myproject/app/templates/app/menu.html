@@ -1,40 +1,66 @@
-﻿{% extends "app/layout.html" %}
+{% extends "app/layout.html" %}
 
 {% block content %}
 
 <div>
     <br />
-    {% if is_employee %}
-         <h2>Employee Menu</h2>
-    {% elif is_manager %}
-         <h2>Manager Menu</h2>
+    {% if is_dentist %}
+         <h2>Dentist Menu</h2>
+    {% elif is_patient %}
+         <h2>Patient Menu</h2>
     {% endif %}
 
     <br />
     <table>
-    {% if is_employee %}
+    {% if is_dentist %}
         <tr><td>
     <form class="margintop" action='module1' method='GET'>
-        <button type="submit" class="btn btn-info">Module 1</button><br />
+        <button type="submit" class="btn btn-info">Invoice Approval</button><br />
     </form>
             </td></tr>
             
         <tr><td>
     <form class="margintop" action='module2' method='GET'>
-        <button type="submit" class="btn btn-outline-info waves-effect">Module 2</button><br />
+        <button type="submit" class="btn btn-outline-info waves-effect">View Appointment Billing</button><br />
     </form>
         </td></tr>
 
-    {% elif is_manager %}            
+
+        <tr><td>
+    <form class="margintop" action='module2' method='GET'>
+        <button type="submit" class="btn btn-outline-info waves-effect">Invoice Review</button><br />
+    </form>
+        </td></tr>
+
+    
+        <tr><td>
+    <form class="margintop" action='module2' method='GET'>
+        <button type="submit" class="btn btn-outline-info waves-effect">Make Appointment</button><br />
+    </form>
+        </td></tr>
+
+    {% elif is_patient %}            
         <tr><td>
     <form class="margintop" action='module3' method='GET'>
-        <button type="submit" class="btn btn-info">Module 3</button><br />
+        <button type="submit" class="btn btn-info ">Make Payment</button><br />
     </form>
         </td></tr>
             
         <tr><td>
     <form class="margintop" action='module4' method='GET'>
-        <button type="submit" class="btn btn-outline-info waves-effect">Module 4</button><br />
+        <button type="submit" class="btn btn-outline-info waves-effect">Track Payment</button><br />
+    </form>
+        </td></tr>
+
+        <tr><td>
+    <form class="margintop" action='module4' method='GET'>
+        <button type="submit" class="btn btn-outline-info waves-effect">Invoice Review</button><br />
+    </form>
+        </td></tr>
+
+        <tr><td>
+    <form class="margintop" action='module4' method='GET'>
+        <button type="submit" class="btn btn-outline-info waves-effect">Make Appointment</button><br />
     </form>
         </td></tr>
                       
